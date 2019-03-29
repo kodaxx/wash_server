@@ -16,12 +16,12 @@ app.get('/relay1', function(req, res) {
   const relay = new DQ10rly(0x50)
   console.log("running")
   res.sendStatus(200)
-  
+
   relay.DQ.setChannel(0, true)   // write single digital output channel
 
   setTimeout(function () {
     relay.DQ.setChannel(0, false)
-  }, 3000)
+  }, 10000)
 })
 
 // set server
