@@ -21,18 +21,30 @@ app.get('/relay1', function(req, res) {
 
   setTimeout(function () {
     relay.DQ.setChannel(0, false)
-  }, 10000)
+  }, 120000)
+})
+
+app.get('/relay2', function(req, res) {
+  const relay = new DQ10rly(0x50)
+  console.log("running")
+  res.sendStatus(200)
+
+  relay.DQ.setChannel(0, true)   // write single digital output channel
+
+  setTimeout(function () {
+    relay.DQ.setChannel(0, false)
+  }, 120000)
 })
 
 app.get('/relay', function(req, res) {
-  let id = req.query.id
+  let id = parseInt(req.query.id)
   let time = req.query.time * 1000
 
   const relay = new DQ10rly(id)
   console.log("running")
   res.sendStatus(200)
 
-  relay.DQ.setChannel(0, true)   // write single digital output channel
+  relay.DQ.setChannel(id, true)   // write single digital output channel
 
   setTimeout(function () {
     relay.DQ.setChannel(0, false)
