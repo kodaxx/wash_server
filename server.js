@@ -40,14 +40,14 @@ app.get('/relay', function(req, res) {
   let id = parseInt(req.query.id)
   let time = req.query.time * 1000
 
-  const relay = new DQ10rly(id)
+  const relay = new DQ10rly(0x50)
   console.log("running")
   res.sendStatus(200)
 
   relay.DQ.setChannel(id, true)   // write single digital output channel
 
   setTimeout(function () {
-    relay.DQ.setChannel(0, false)
+    relay.DQ.setChannel(id, false)
   }, time)
 })
 
