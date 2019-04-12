@@ -24,6 +24,21 @@ app.get('/relay1', function(req, res) {
   }, 10000)
 })
 
+app.get('/relay', function(req, res) {
+  let id = req.query.id
+  let time = req.query.time * 1000
+
+  const relay = new DQ10rly(id)
+  console.log("running")
+  res.sendStatus(200)
+
+  relay.DQ.setChannel(0, true)   // write single digital output channel
+
+  setTimeout(function () {
+    relay.DQ.setChannel(0, false)
+  }, time)
+})
+
 // set server
 const port = 3000;
 app.listen(port);
